@@ -1,0 +1,24 @@
+{% extends 'client/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+  <form action="{% url 'home' %}" method="get">
+    <div>
+      <ul>
+        <li><input type="submit" name="orderby" value="company_name"></li>
+        <li><input type="submit" name="orderby" value="-company_name"></li>
+        <li><input type="submit" name="orderby" value="date_create"></li>
+        <li><input type="submit" name="orderby" value="-date_create"></li>
+      </ul>
+    </div>
+  </form>
+<ul>
+  {% for field in client_info %}
+    <li>
+      <h2>{{field.company_name}} {{field.date_create}}</h2>
+      {{Phone.phone}}
+      <hr>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
