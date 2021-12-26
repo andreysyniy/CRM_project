@@ -1,0 +1,11 @@
+{% extends 'client/base.html' %}
+{% block content %}
+  <h1>Название компании: &nbsp;<em>{{client_detail.company_name}}</em></h1>
+  <h2>Ф.И.О.: <em>{{client_detail.full_name_director}}</em></h2>
+  <h2>Краткое описание: &nbsp;<em>{{client_detail.short_description}}</em></h2>
+  <h2>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h2>
+  <h2>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h2>
+  <h2>Адрес: &nbsp;<em>{{client_detail.address}}</em></h2>
+  <br>
+  <a href="#">Редактировать данные клиента</a>
+{% endblock %}

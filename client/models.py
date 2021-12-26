@@ -1,6 +1,7 @@
 from django.db import models
-from django.db.models.fields import CharField, DateTimeField, EmailField, TextField
+from django.db.models.fields import CharField, DateTimeField, EmailField
 from django.urls import reverse
+from tinymce import models as tinymce_models
 
 # Create your models here.
 
@@ -31,7 +32,7 @@ class Phone(models.Model):
 class Client(models.Model):
   company_name = CharField('Название компании', max_length=100)
   full_name_director = CharField('Ф.И.О. директора', max_length=100)
-  short_description = TextField('Краткое описание', max_length=300)
+  short_description = tinymce_models.HTMLField('Краткое описание')
   date_create = DateTimeField('Дата создания',auto_now_add=True)
   date_change = DateTimeField('Дата изменения', auto_now=True)
   address = CharField('Адрес', max_length=200)
@@ -39,8 +40,8 @@ class Client(models.Model):
   def __str__(self):
       return self.company_name
 
-  # def get_absolute_url(self):
-  #   return reverse('client', kwargs={'client_id': self.pk})  
+  def get_absolute_url(self):
+    return reverse('client_detail', kwargs={'client_id': self.pk})  
 
   class Meta:
     verbose_name = 'Клиент'
