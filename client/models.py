@@ -6,6 +6,7 @@ from tinymce import models as tinymce_models
 # Create your models here.
 
 class Email(models.Model):
+  '''Модель email'''
   email = EmailField(max_length=100)
   client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True)
 
@@ -18,6 +19,7 @@ class Email(models.Model):
 
 
 class Phone(models.Model):
+  '''Модель телефон'''
   phone = CharField(max_length=50)
   client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True)
 
@@ -30,6 +32,7 @@ class Phone(models.Model):
 
 
 class Client(models.Model):
+  '''Модель клиент'''
   company_name = CharField('Название компании', max_length=100)
   full_name_director = CharField('Ф.И.О. директора', max_length=100)
   short_description = tinymce_models.HTMLField('Краткое описание')
