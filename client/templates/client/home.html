@@ -16,7 +16,12 @@
   {% for field in client_info %}
     <li>
       <h2><a href="{{ field.get_absolute_url }}">{{field.company_name}}</a> 
-      &nbsp; &nbsp; &nbsp; {{field.date_create}}</h2>
+      &nbsp; &nbsp; &nbsp; {{field.date_create}}
+      &nbsp; &nbsp;
+      {% for phone in field.phone_set.all %}
+        {{phone}}
+      {% endfor %}
+      </h2>
       <hr>
     </li>
   {% endfor %}

@@ -6,6 +6,9 @@
   <h2>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h2>
   <h2>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h2>
   <h2>Адрес: &nbsp;<em>{{client_detail.address}}</em></h2>
+  {% for phone in client_detail.phone_set.all %}
+    <h2>Телефон: &nbsp;<em>{{phone}}</em></h2>
+  {% endfor %}
   <br>
   <a href="#">Редактировать данные клиента</a>
 {% endblock %}

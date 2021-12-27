@@ -50,3 +50,4 @@ class Client(models.Model):
     verbose_name = 'Клиент'
     verbose_name_plural = 'Клиенты'
     ordering = ['company_name', 'date_create']
+
