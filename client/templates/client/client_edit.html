@@ -1,10 +1,10 @@
 {% extends 'client/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-  <h1>Название компании: <em>{{client_detail.company_name}}</em></h1>
-  <h2>Ф.И.О. <em>{{client_detail.full_name_director}}</em></h2>
-  <h2>Краткое описание <em>{{client_detail.short_description}}</em></h2>
-  <h2>Дата создания <em>{{client_detail.date_create}}</em></h2>
-  <h2>Дата изменения <em>{{client_detail.date_change}}</em></h2>
-  <h2>Адрес <em>{{client_detail.address}}</em></h2>
-  <br>
+{{ form.media }}
+<form method="post" class="uniform">
+  {% csrf_token %}
+  {{ form | crispy | safe}}
+  <input type="submit" value="Update"></input>
+</form>
 {% endblock %}

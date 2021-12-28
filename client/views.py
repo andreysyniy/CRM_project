@@ -1,5 +1,7 @@
 # from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.db.models import fields
+from django.http import request
+from django.views.generic.edit import CreateView, UpdateView
 
 from client.forms import ClientEditForm
 from .models import *
@@ -43,8 +45,9 @@ class ClientDetail(DetailView):
   context_object_name = 'client_detail'
 
 
-class ClientEdit(CreateView):
+class ClientEdit(UpdateView):
   '''Форма редактирования клиентской информации'''
-  form_class = ClientEditForm
+  model = Client
+  fields = ['company_name', 'full_name_director', 'short_description']
   template_name = 'client/client_edit.html'
-
+  pk_url_kwarg = 'client_id'

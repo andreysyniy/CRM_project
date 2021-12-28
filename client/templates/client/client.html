@@ -1,14 +1,20 @@
 {% extends 'client/base.html' %}
 {% block content %}
-  <h1>Название компании: &nbsp;<em>{{client_detail.company_name}}</em></h1>
-  <h2>Ф.И.О.: <em>{{client_detail.full_name_director}}</em></h2>
-  <h2>Краткое описание: &nbsp;<em>{{client_detail.short_description}}</em></h2>
-  <h2>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h2>
-  <h2>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h2>
-  <h2>Адрес: &nbsp;<em>{{client_detail.address}}</em></h2>
+  <h3>Название компании: &nbsp;<em>{{client_detail.company_name}}</em></h3>
+  <h4>Ф.И.О.: <em>{{client_detail.full_name_director}}</em></h4>
+  <div style="border-style: double; margin-right: 30px;">
+    <h4>Краткое описание: </h4> {% autoescape off %}{{client_detail.short_description}}{% endautoescape %}
+  </div>
+  <h4>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h4>
+  <h4>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h4>
+  <h4>Адрес: &nbsp;<em>{{client_detail.address}}</em></h4>
   {% for phone in client_detail.phone_set.all %}
-    <h2>Телефон: &nbsp;<em>{{phone}}</em></h2>
+    <h4>Телефон: &nbsp;<em>{{phone}}</em></h4>
+  {% endfor %}
+  {% for email in client_detail.email_set.all %}
+    <h4>Электронная почта: &nbsp;<em>{{email}}</em></h4>
   {% endfor %}
   <br>
-  <a href="#">Редактировать данные клиента</a>
+  <a href="{% url 'client_edit' client_detail.pk %}">Редактировать данные клиента</a>
 {% endblock %}
+
