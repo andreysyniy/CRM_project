@@ -15,6 +15,6 @@
     <h4>Электронная почта: &nbsp;<em>{{email}}</em></h4>
   {% endfor %}
   <br>
-  <a href="{% url 'client_edit' client_detail.pk %}">Редактировать данные клиента</a>
+  <a href="{% url 'client_update' client_detail.pk %}">Редактировать данные клиента</a>
 {% endblock %}
 

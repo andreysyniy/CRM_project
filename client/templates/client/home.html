@@ -13,7 +13,7 @@
     </div>
   </form>
 <ul>
-  {% for field in client_info %}
+  {% for field in client_list %}
     <li>
       <h2><a href="{{ field.get_absolute_url }}">{{field.company_name}}</a> 
       &nbsp; &nbsp; &nbsp; {{field.date_create}}
