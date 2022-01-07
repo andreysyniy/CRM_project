@@ -5,6 +5,8 @@
 <form method="post" class="uniform">
   {% csrf_token %}
   {{ form | crispy }}
+  {{ phone_formset | crispy }}
+  {{ email_formset | crispy }}
   <!-- {% for phone in second_model %}
     Телефон {{ forloop.counter }}:<input value="{{ phone }}" type="text"></input>
   {% endfor %} -->
