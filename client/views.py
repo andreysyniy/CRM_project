@@ -1,6 +1,6 @@
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import PhoneFormset, EmailFormset
+from .forms import PhoneFormset, EmailFormset, CreateEmailFormset, CreatePhoneFormset
 from .models import *
 from django.views.generic import ListView, DetailView
 
@@ -36,14 +36,14 @@ class ClientCreate(CreateView):
     context = super().get_context_data(**kwargs)
     context['title'] = 'Создание информации о клиенте'
     if self.request.POST:
-        context['phone_formset'] = PhoneFormset(self.request.POST, instance=self.object)
+        context['phone_formset'] = CreatePhoneFormset(self.request.POST, instance=self.object)
         context['phone_formset'].full_clean()
         
-        context['email_formset'] = EmailFormset(self.request.POST, instance=self.object)
+        context['email_formset'] = CreateEmailFormset(self.request.POST, instance=self.object)
         context['email_formset'].full_clean()
     else:
-        context['phone_formset'] = PhoneFormset(instance=self.object)
-        context['email_formset'] = EmailFormset(instance=self.object)
+        context['phone_formset'] = CreatePhoneFormset(instance=self.object)
+        context['email_formset'] = CreateEmailFormset(instance=self.object)
     return context
 
   def form_valid(self, form):
@@ -105,20 +105,8 @@ class ClientDelete(DeleteView):
   '''Форма редактирования клиентской информации'''
   model = Client
   fields = ['company_name', 'full_name_director', 'short_description', 'address']
-  template_name = 'client/client_update.html'
   pk_url_kwarg = 'client_id'
+  template_name = 'client/client_delete.html'
+  success_url = reverse_lazy('home')
+  
 
-class PhoneUpdate(UpdateView):
-  '''Форма редактирования клиентской информации'''
-  model = Phone
-  fields = ['phone']
-  template_name = 'client/client_update.html'
-  pk_url_kwarg = 'client_id'
-
-
-class EmailUpdate(UpdateView):
-  '''Форма редактирования клиентской информации'''
-  model = Email
-  fields = ['email']
-  template_name = 'client/client_update.html'
-  pk_url_kwarg = 'client_id'

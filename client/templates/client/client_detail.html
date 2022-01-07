@@ -16,5 +16,8 @@
   {% endfor %}
   <br>
   <a href="{% url 'client_update' client_detail.pk %}">Редактировать данные клиента</a>
+  <br>
+  <br>
+  <a href="{% url 'client_delete' client_detail.pk %}">Удалить данные клиента</a>
 {% endblock %}
 
