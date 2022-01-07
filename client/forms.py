@@ -1,6 +1,18 @@
 from django import forms
 from .models import *
 from tinymce.widgets import TinyMCE
+from django.http import request
+
+
+class ClientCreateForm(forms.Form):
+  company_name = forms.CharField(label='Название Компании', widget=forms.TextInput())
+  full_name_director = forms.CharField(label='Ф.И.О.', widget=forms.TextInput())
+  short_description = forms.CharField(label='Краткое Описание' ,widget=TinyMCE(attrs={'cols': 50, 'rows': 20}))
+  address = forms.CharField(label='Адрес', widget=forms.TextInput())
+  # class Meta:
+  #   model = Client
+  #   fields = '__all__'  
+  
 
 # class ClientUpdateForm(forms.Form):
 #   company_name = forms.CharField(label='Название Компании', widget=forms.TextInput())

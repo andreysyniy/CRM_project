@@ -5,15 +5,15 @@
 <form method="post" class="uniform">
   {% csrf_token %}
   {{ form | crispy }}
-  {% for phone in second_model %}
+  <!-- {% for phone in second_model %}
     Телефон {{ forloop.counter }}:<input value="{{ phone }}" type="text"></input>
-  {% endfor %}
+  {% endfor %} -->
   <!-- {% for phone in phone_list %}
     Телефон {{ forloop.counter }}:<input value="{{ phone.phone }}" type="text"></input>
   {% endfor %}
   {% for email in email_list %}
    Электронная почта {{ forloop.counter }}:<input value="{{ email.email }}" type="text"></input>
   {% endfor %} -->
-  <input type="submit" value="Update"></input>
+  <input type="submit" value="Create"></input>
 </form>
 {% endblock %}

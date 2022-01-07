@@ -8,10 +8,10 @@
   <h4>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h4>
   <h4>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h4>
   <h4>Адрес: &nbsp;<em>{{client_detail.address}}</em></h4>
-  {% for phone in client_detail.phone_set.all %}
+  {% for phone in client_detail.client_phones.all %}
     <h4>Телефон: &nbsp;<em>{{phone}}</em></h4>
   {% endfor %}
-  {% for email in client_detail.email_set.all %}
+  {% for email in client_detail.client_emails.all %}
     <h4>Электронная почта: &nbsp;<em>{{email}}</em></h4>
   {% endfor %}
   <br>
