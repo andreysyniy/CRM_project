@@ -3,7 +3,7 @@ from django.db.models.fields import CharField, DateTimeField, EmailField
 from django.urls import reverse
 from tinymce import models as tinymce_models
 
-# Create your models here.
+
 
 class Email(models.Model):
   '''Модель email'''

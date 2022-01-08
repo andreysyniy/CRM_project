@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView
 class Home(ListView):
   '''Отображение списка клиентов'''
   model = Client
-  paginate_by = 2
+  paginate_by = 4
   template_name = 'client/home.html'
   context_object_name = 'client_list'
   extra_context = {'title': 'Домашняя страница'}
