@@ -1,10 +1,10 @@
 {% extends 'client/base.html' %}
 
 {% block content %}
-<h1>{{title}}</h1>
+<h1>{{title}}:</h1>
   <form action="{% url 'project_list' %}" method="get">
     <div class="row">
-      <div class="m-2">
+      <div class="m-3">
         <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="name">˄ имя</button>
         <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="-name">˅ имя</button>
         <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="date_begin">˄ дата начала</button>
@@ -15,10 +15,9 @@
 <ul>
   {% for field in project_list %}
     <li>
-      <h2><a href="{{ field.get_absolute_url }}">{{field.name}}</a> 
-      &nbsp; &nbsp; &nbsp; {{field.date_begin}}
-      &nbsp; &nbsp; {{field.date_end}}
-      </h2>
+      <h5>Название проекта: <a href="{{ field.get_absolute_url }}">{{field.name}}</a></h5>
+      Дата начала: {{field.date_begin}}
+      Дата окончания: {{field.date_end}}
       <hr>
     </li>
   {% endfor %}

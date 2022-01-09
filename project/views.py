@@ -10,7 +10,7 @@ class ProjectList(ListView):
   paginate_by = 4
   template_name = 'project/project_list.html'
   context_object_name = 'project_list'
-  extra_context = {'title': 'Список проектов'}
+  extra_context = {'title': 'Все проекты'}
 
   def get_ordering(self):
       return self.request.GET.get('orderby')
@@ -21,7 +21,7 @@ class ProjectClientList(DetailView):
   model = Client
   template_name = 'project/project_client_list.html'
   pk_url_kwarg = 'client_id'
-  extra_context = {'title': 'Список проектов клиента'}
+  extra_context = {'title': 'Проекты клиента'}
   allow_empty = True
 
   def get_context_data(self, **kwargs):
@@ -35,10 +35,18 @@ class ProjectDetail(DetailView):
   template_name = 'project/project_detail.html'
   pk_url_kwarg = 'project_id'
   context_object_name = 'project_detail'
+  extra_context = {'title': 'Информация о проекте'}
 
 
 class ProjectCreate(CreateView):
-  pass
+  '''Форма создания проекта'''  
+  model = Project
+  fields = '__all__'
+  template_name = 'project/project_create.html'
+  pk_url_kwarg = 'project_id'
+  success_url = reverse_lazy('project_list')
+  extra_context = {'title': 'Создание проекта'}
+
 
 
 class ProjectUpdate(UpdateView):
@@ -48,12 +56,14 @@ class ProjectUpdate(UpdateView):
   template_name = 'project/project_update.html'
   pk_url_kwarg = 'project_id'
   success_url = reverse_lazy('project_list')
-
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context['title'] = 'Изменение проекта'
-    return context
+  extra_context = {'title': 'Редактирование проекта'}
 
 
 class ProjectDelete(DeleteView):
-  pass
+  '''Форма удаления проекта'''  
+  model = Project
+  fields = '__all__'
+  template_name = 'project/project_delete.html'
+  pk_url_kwarg = 'project_id'
+  success_url = reverse_lazy('project_list')
+  extra_context = {'title': 'Удаление проекта'}

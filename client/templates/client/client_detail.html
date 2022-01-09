@@ -1,27 +1,27 @@
 {% extends 'client/base.html' %}
 {% block content %}
-  <h3>Название компании: &nbsp;<em>{{client_detail.company_name}}</em></h3>
-  <h4>Ф.И.О.: <em>{{client_detail.full_name_director}}</em></h4>
+  <h4>Название компании: &nbsp;<em>{{client_detail.company_name}}</em></h4>
+  <h6>Ф.И.О.: <em>{{client_detail.full_name_director}}</em></h6>
   <div style="border-style: double; margin-right: 30px;">
-    <h4>Краткое описание: </h4> {% autoescape off %}{{client_detail.short_description}}{% endautoescape %}
+    <h6>Краткое описание: </h6> {% autoescape off %}{{client_detail.short_description}}{% endautoescape %}
   </div>
-  <h4>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h4>
-  <h4>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h4>
-  <h4>Адрес: &nbsp;<em>{{client_detail.address}}</em></h4>
+  <h6>Дата создания: &nbsp;<em>{{client_detail.date_create}}</em></h6>
+  <h6>Дата изменения: &nbsp;<em>{{client_detail.date_change}}</em></h6>
+  <h6>Адрес: &nbsp;<em>{{client_detail.address}}</em></h6>
   {% for phone in client_detail.client_phones.all %}
-    <h4>Телефон: &nbsp;<em>{{phone}}</em></h4>
+    <h6>Телефон: &nbsp;<em>{{phone}}</em></h6>
   {% endfor %}
   {% for email in client_detail.client_emails.all %}
-    <h4>Электронная почта: &nbsp;<em>{{email}}</em></h4>
+    <h6>Электронная почта: &nbsp;<em>{{email}}</em></h6>
   {% endfor %}
   <div class="mt-3">
-    <a href="{% url 'project_client_list' client_detail.pk %}" class="text-info fs-4">Проекты клиента</a>
-  </div>
-  <div class="mt-4">
-    <a href="{% url 'client_update' client_detail.pk %}" class="text-secondary fs-5">Редактировать данные клиента</a>
+    <a href="{% url 'project_client_list' client_detail.pk %}" class="text-info fs-5">Проекты клиента</a>
   </div>
   <div class="mt-2">
-    <a href="{% url 'client_delete' client_detail.pk %}" class="text-danger fs-5">Удалить данные клиента</a>
+    <a href="{% url 'client_update' client_detail.pk %}" class="text-secondary fs-6">Редактировать данные клиента</a>
+  </div>
+  <div class="mt-2">
+    <a href="{% url 'client_delete' client_detail.pk %}" class="text-danger fs-6">Удалить данные клиента</a>
   </div>
 {% endblock %}
 

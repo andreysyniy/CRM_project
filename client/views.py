@@ -23,10 +23,11 @@ class ClientDetail(DetailView):
   template_name = 'client/client_detail.html'
   pk_url_kwarg = 'client_id'
   context_object_name = 'client_detail'
+  extra_context = {'title': 'Информация о клиенте'}
 
 
 class ClientCreate(CreateView):
-  '''Форма редактирования клиентской информации'''
+  '''Форма создания клиента'''
   model = Client
   fields = '__all__'
   template_name = 'client/client_create.html'
@@ -34,7 +35,7 @@ class ClientCreate(CreateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['title'] = 'Создание информации о клиенте'
+    context['title'] = 'Создание клиента'
     if self.request.POST:
         context['phone_formset'] = CreatePhoneFormset(self.request.POST, instance=self.object)
         context['phone_formset'].full_clean()
@@ -64,7 +65,7 @@ class ClientCreate(CreateView):
 
 
 class ClientUpdate(UpdateView):
-  '''Форма редактирования клиентской информации'''  
+  '''Форма редактирования клиента'''  
   model = Client
   fields = '__all__'
   template_name = 'client/client_update.html'
@@ -73,7 +74,7 @@ class ClientUpdate(UpdateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['title'] = 'Изменение информации о клиенте'
+    context['title'] = 'Редактирование клиента'
     if self.request.POST:
         context['phone_formset'] = PhoneFormset(self.request.POST, instance=self.object)
         context['phone_formset'].full_clean()
@@ -100,13 +101,11 @@ class ClientUpdate(UpdateView):
       return super().form_invalid(form)
 
 
-
 class ClientDelete(DeleteView):
-  '''Форма редактирования клиентской информации'''
+  '''Форма удаления клиента'''
   model = Client
   fields = ['company_name', 'full_name_director', 'short_description', 'address']
   pk_url_kwarg = 'client_id'
   template_name = 'client/client_delete.html'
   success_url = reverse_lazy('client_list')
-  
-
+  extra_context = {'title': 'Удаление клиента'}

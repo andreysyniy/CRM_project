@@ -12,25 +12,25 @@
       {% url 'client_list' as client_list_page %}
       {% if client_list_page == request.path %}
         <a href="{% url 'client_list' %}" style="text-decoration: none;">
-          <button class="nav-link active" type="button" aria-selected="true">Clients list</button>
+          <button class="nav-link active" type="button" aria-selected="true">Список клиентов</button>
         </a>
       {% else %}
         <a href="{% url 'client_list' %}" style="text-decoration: none;">
-          <button class="nav-link" type="button" aria-selected="true">Client list</button>
+          <button class="nav-link" type="button" aria-selected="true">Список клиентов</button>
         </a>
       {% endif %}
       {% url 'project_list' as project_list_page %}
       {% if project_list_page == request.path %}
         <a href="{% url 'project_list' %}" style="text-decoration: none;">
-          <button class="nav-link active" type="button" aria-selected="true">Projects list</button>
+          <button class="nav-link active" type="button" aria-selected="true">Все проекты</button>
         </a>
       {% else %}
         <a href="{% url 'project_list' %}" style="text-decoration: none;">
-          <button class="nav-link" type="button" aria-selected="true">Projects list</button>
+          <button class="nav-link" type="button" aria-selected="true">Все проекты</button>
         </a>
       {% endif %}
       <a href="#" style="text-decoration: none;">
-        <button class="nav-link" type="button" aria-selected="true">LogIn</button>
+        <button class="nav-link" type="button" aria-selected="true">Авторизация</button>
       </a>
     </div>
     <div class="tab-content" id="v-pills-tabContent">
@@ -44,7 +44,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination pagination-sm">
           {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Пред.</a></li>
           {% endif %}
           {% for p in paginator.page_range %}
           {% if page_obj.number == p %}
@@ -54,7 +54,7 @@
           {% endif %}
           {% endfor %}
           {% if page_obj.has_next %}
-          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">След.</a></li>
           {% endif %}
         </ul>
       </nav>
