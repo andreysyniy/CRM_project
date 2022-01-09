@@ -9,14 +9,24 @@
 
   <div class="d-flex align-items-start">
     <div class="nav flex-column nav-pills me-3" role="tablist" aria-orientation="vertical">
-      {% url 'home' as home_page %}
-      {% if home_page == request.path %}
-        <a href="{% url 'home' %}" style="text-decoration: none;">
-          <button class="nav-link active" type="button" aria-selected="true">Home</button>
+      {% url 'client_list' as client_list_page %}
+      {% if client_list_page == request.path %}
+        <a href="{% url 'client_list' %}" style="text-decoration: none;">
+          <button class="nav-link active" type="button" aria-selected="true">Clients list</button>
         </a>
       {% else %}
-        <a href="{% url 'home' %}" style="text-decoration: none;">
-          <button class="nav-link" type="button" aria-selected="true">Home</button>
+        <a href="{% url 'client_list' %}" style="text-decoration: none;">
+          <button class="nav-link" type="button" aria-selected="true">Client list</button>
+        </a>
+      {% endif %}
+      {% url 'project_list' as project_list_page %}
+      {% if project_list_page == request.path %}
+        <a href="{% url 'project_list' %}" style="text-decoration: none;">
+          <button class="nav-link active" type="button" aria-selected="true">Projects list</button>
+        </a>
+      {% else %}
+        <a href="{% url 'project_list' %}" style="text-decoration: none;">
+          <button class="nav-link" type="button" aria-selected="true">Projects list</button>
         </a>
       {% endif %}
       <a href="#" style="text-decoration: none;">
@@ -32,7 +42,7 @@
       <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
       <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination pagination-sm">
           {% if page_obj.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
           {% endif %}

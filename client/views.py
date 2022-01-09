@@ -5,13 +5,13 @@ from .models import *
 from django.views.generic import ListView, DetailView
 
 
-class Home(ListView):
+class ClientList(ListView):
   '''Отображение списка клиентов'''
   model = Client
   paginate_by = 4
-  template_name = 'client/home.html'
+  template_name = 'client/client_list.html'
   context_object_name = 'client_list'
-  extra_context = {'title': 'Домашняя страница'}
+  extra_context = {'title': 'Список клиентов'}
 
   def get_ordering(self):
       return self.request.GET.get('orderby')
@@ -30,7 +30,7 @@ class ClientCreate(CreateView):
   model = Client
   fields = '__all__'
   template_name = 'client/client_create.html'
-  success_url = reverse_lazy('home')
+  success_url = reverse_lazy('client_list')
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -69,7 +69,7 @@ class ClientUpdate(UpdateView):
   fields = '__all__'
   template_name = 'client/client_update.html'
   pk_url_kwarg = 'client_id'
-  success_url = reverse_lazy('home')
+  success_url = reverse_lazy('client_list')
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -107,6 +107,6 @@ class ClientDelete(DeleteView):
   fields = ['company_name', 'full_name_director', 'short_description', 'address']
   pk_url_kwarg = 'client_id'
   template_name = 'client/client_delete.html'
-  success_url = reverse_lazy('home')
+  success_url = reverse_lazy('client_list')
   
 

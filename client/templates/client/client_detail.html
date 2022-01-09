@@ -15,7 +15,7 @@
     <h4>Электронная почта: &nbsp;<em>{{email}}</em></h4>
   {% endfor %}
   <div class="mt-3">
-    <a href="{% url 'client_update' client_detail.pk %}" class="text-info fs-4">Проекты клиента</a>
+    <a href="{% url 'project_client_list' client_detail.pk %}" class="text-info fs-4">Проекты клиента</a>
   </div>
   <div class="mt-4">
     <a href="{% url 'client_update' client_detail.pk %}" class="text-secondary fs-5">Редактировать данные клиента</a>

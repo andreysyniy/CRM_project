@@ -1,0 +1,16 @@
+{% extends 'client/base.html' %}
+{% block content %}
+  <h3>Название проекта: &nbsp;<em>{{project_detail.name}}</em></h3>
+  <div style="border-style: double; margin-right: 30px;">
+    <h4>Описание: </h4> {% autoescape off %}{{project_detail.description}}{% endautoescape %}
+  </div>
+  <h4>Дата начала: &nbsp;<em>{{project_detail.date_begin}}</em></h4>
+  <h4>Дата окончания: &nbsp;<em>{{project_detail.date_end}}</em></h4>
+  <h4>Стоимость: &nbsp;<em>{{project_detail.price}}</em></h4>
+  <div class="mt-4">
+    <a href="{% url 'project_update' project_detail.pk %}" class="text-secondary fs-5">Редактировать проект</a>
+  </div>
+  <div class="mt-2">
+    <a href="{% url 'project_delete' project_detail.pk %}" class="text-danger fs-5">Удалить проект</a>
+  </div>
+{% endblock %}

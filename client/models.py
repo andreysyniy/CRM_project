@@ -33,12 +33,12 @@ class Phone(models.Model):
 
 class Client(models.Model):
   '''Модель клиент'''
-  company_name = CharField('Название компании', max_length=100)
-  full_name_director = CharField('Ф.И.О. директора', max_length=100)
+  company_name = CharField(verbose_name='Название компании', max_length=100)
+  full_name_director = CharField(verbose_name='Ф.И.О. директора', max_length=100)
   short_description = tinymce_models.HTMLField('Краткое описание')
-  date_create = DateTimeField('Дата создания',auto_now_add=True)
-  date_change = DateTimeField('Дата изменения', auto_now=True)
-  address = CharField('Адрес', max_length=200)
+  date_create = DateTimeField(verbose_name='Дата создания',auto_now_add=True)
+  date_change = DateTimeField(verbose_name='Дата изменения', auto_now=True)
+  address = CharField(verbose_name='Адрес', max_length=200)
 
   def __str__(self):
       return self.company_name
