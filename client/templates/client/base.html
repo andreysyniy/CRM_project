@@ -8,27 +8,44 @@
 <body>
 
   <div class="d-flex align-items-start">
-    <div class="nav flex-column nav-pills me-3" role="tablist" aria-orientation="vertical">
+    <div class="nav flex-column nav-pills me-3" role="tablist" aria-orientation="vertical" style="width: min-content;">
+
       {% url 'client_list' as client_list_page %}
+        <a href="{% url 'client_list' %}" style="text-decoration: none;">
+        <button class="nav-link 
       {% if client_list_page == request.path %}
-        <a href="{% url 'client_list' %}" style="text-decoration: none;">
-          <button class="nav-link active" type="button" aria-selected="true">Список клиентов</button>
-        </a>
-      {% else %}
-        <a href="{% url 'client_list' %}" style="text-decoration: none;">
-          <button class="nav-link" type="button" aria-selected="true">Список клиентов</button>
-        </a>
+      active 
       {% endif %}
+        " type="button" aria-selected="true">Все клиенты</button>
+      </a>
+
+      {% url 'interactions_clients' as interactions_clients_page %}
+        <a href="{% url 'interactions_clients' %}" style="text-decoration: none;">
+        <button class="nav-link 
+      {% if interactionsaa_clients_page == request.path %}
+      active 
+      {% endif %}
+        " type="button" aria-selected="true">Взаимодействия по клиентам</button>
+      </a>
+
       {% url 'project_list' as project_list_page %}
+      <a href="{% url 'project_list' %}" style="text-decoration: none;">
+        <button class="nav-link 
       {% if project_list_page == request.path %}
-        <a href="{% url 'project_list' %}" style="text-decoration: none;">
-          <button class="nav-link active" type="button" aria-selected="true">Все проекты</button>
-        </a>
-      {% else %}
-        <a href="{% url 'project_list' %}" style="text-decoration: none;">
-          <button class="nav-link" type="button" aria-selected="true">Все проекты</button>
-        </a>
+      active 
       {% endif %}
+      " type="button" aria-selected="true">Все проекты</button>
+      </a>
+
+      {% url 'interactions_projects' as interactions_projects_page %}
+      <a href="{% url 'interactions_projects' %}" style="text-decoration: none;">
+        <button class="nav-link 
+      {% if interactions_projects_page == request.path %}
+      active 
+      {% endif %}
+      " type="button" aria-selected="true">Взаимодействия по проектам</button>
+      </a>
+
       <a href="#" style="text-decoration: none;">
         <button class="nav-link" type="button" aria-selected="true">Авторизация</button>
       </a>

@@ -7,7 +7,10 @@
   <h6>Дата начала: &nbsp;<em>{{project_detail.date_begin}}</em></h6>
   <h6>Дата окончания: &nbsp;<em>{{project_detail.date_end}}</em></h6>
   <h6>Стоимость: &nbsp;<em>{{project_detail.price}}</em></h6>
-  <div class="mt-3">
+  <div class="mt-4">
+    <a href="{% url 'interactions_project' project_detail.pk %}" class="text-info fs-6">Взаимодействия по проекту</a>
+  </div>
+  <div class="mt-4">
     <a href="{% url 'project_update' project_detail.pk %}" class="text-secondary fs-6">Редактировать проект</a>
   </div>
   <div class="mt-2">

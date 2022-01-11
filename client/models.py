@@ -8,7 +8,7 @@ from tinymce import models as tinymce_models
 class Email(models.Model):
   '''Модель email'''
   email = EmailField('Электронная почта', max_length=100)
-  client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, related_name='client_emails')
+  client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, related_name='email_client')
 
   def __str__(self):
       return self.email
@@ -21,7 +21,7 @@ class Email(models.Model):
 class Phone(models.Model):
   '''Модель телефон'''
   phone = CharField('Телефон', max_length=50)
-  client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, related_name='client_phones')
+  client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, related_name='phone_client')
 
   def __str__(self):
       return self.phone

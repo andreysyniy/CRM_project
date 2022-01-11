@@ -7,15 +7,6 @@
   {{ form | crispy }}
   {{ phone_formset | crispy }}
   {{ email_formset | crispy }}
-  <!-- {% for phone in second_model %}
-    Телефон {{ forloop.counter }}:<input value="{{ phone }}" type="text"></input>
-  {% endfor %} -->
-  <!-- {% for phone in phone_list %}
-    Телефон {{ forloop.counter }}:<input value="{{ phone.phone }}" type="text"></input>
-  {% endfor %}
-  {% for email in email_list %}
-   Электронная почта {{ forloop.counter }}:<input value="{{ email.email }}" type="text"></input>
-  {% endfor %} -->
   <input type="submit" value="Создать"></input>
 </form>
 {% endblock %}

@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
+    'bootstrap_datepicker_plus',
+    'users.apps.UsersConfig',
+    'interactions.apps.InteractionsConfig',
 ]
 
 MIDDLEWARE = [
@@ -106,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

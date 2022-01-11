@@ -1,0 +1,43 @@
+{% extends 'client/base.html' %}
+
+{% block content %}
+<h1>{{title}}:</h1>
+  <form action="{% url 'interactions_project' project.pk %}" method="get">
+    <div class="row">
+      <div class="m-2">
+        <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="project">˄ Проект</button>
+        <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="-project">˅ Проект</button>
+        <button type="submit" class="btn btn-outline-secondary btn-sm" name="orderby" value="client">˄ Клиент</button>
+        <button type="submit"class="btn btn-outline-secondary btn-sm" name="orderby" value="-client">˅ Клиент</button>
+      </div>
+    </div>
+  </form>
+<table class="table bg-light">
+  <tr>
+    <th>Проект</th>
+    <th>Клиент</th>
+    <th>Канал обращения</th>
+    <th>Менеджер</th>
+    <th>Описание</th>
+    <th>Оценка</th>
+  </tr>
+    {% for field in interactions_project_list %}
+    <tr>
+      <td>
+        <a href="{{ field.project.get_absolute_url }}">{{field.project}}</a> 
+      </td>
+      <td>
+        <a href="{{ field.client.get_absolute_url }}">{{field.client}}</a> 
+      </td>      
+      <td>{{field.get_message_channel_display}}</td>
+      <td>{{field.manager}}</td>
+      <td>
+        {% autoescape off %}
+        {{field.description}}
+        {% endautoescape %}
+      </td>
+      <td>{{field.get_grade_display}}</td>
+    </tr>  
+    {% endfor %}
+</table>
+{% endblock %}

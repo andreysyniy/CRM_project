@@ -6,20 +6,6 @@
   {% for field in project_client_list %}
     <li>
       <h5>Название проекта: <a href="{{ field.get_absolute_url }}">{{field.name}}</a></h5> 
-        <!-- <ul>
-          <li style="border-style: double; margin-right: 30px;">
-              <span>Описание: {% autoescape off %}{{field.description}}{% endautoescape %}</span>
-          </li>
-          <li>
-            <span>Дата начала: {{field.date_begin}}</span>
-          </li>
-          <li>
-            <span>Дата окончания: {{field.date_end}}</span>
-          </li>
-          <li>
-            <span>Стоимость: {{field.price}}</span>
-          </li>
-        </ul> -->
       <hr>
     </li>
   {% endfor %}

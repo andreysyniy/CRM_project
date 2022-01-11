@@ -10,4 +10,5 @@ urlpatterns = [
     path('project/', include('project.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('', include(prj_cli_list_patterns)),
+    path('', include('interactions.urls')),
 ]
