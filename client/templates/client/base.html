@@ -19,15 +19,6 @@
         " type="button" aria-selected="true">Все клиенты</button>
       </a>
 
-      {% url 'interactions_clients' as interactions_clients_page %}
-        <a href="{% url 'interactions_clients' %}" style="text-decoration: none;">
-        <button class="nav-link 
-      {% if interactionsaa_clients_page == request.path %}
-      active 
-      {% endif %}
-        " type="button" aria-selected="true">Взаимодействия по клиентам</button>
-      </a>
-
       {% url 'project_list' as project_list_page %}
       <a href="{% url 'project_list' %}" style="text-decoration: none;">
         <button class="nav-link 
@@ -37,13 +28,13 @@
       " type="button" aria-selected="true">Все проекты</button>
       </a>
 
-      {% url 'interactions_projects' as interactions_projects_page %}
-      <a href="{% url 'interactions_projects' %}" style="text-decoration: none;">
+      {% url 'interactions_list' as interactions_list_page %}
+      <a href="{% url 'interactions_list' %}" style="text-decoration: none;">
         <button class="nav-link 
-      {% if interactions_projects_page == request.path %}
+      {% if interactions_list_page == request.path %}
       active 
       {% endif %}
-      " type="button" aria-selected="true">Взаимодействия по проектам</button>
+      " type="button" aria-selected="true">Взаимодействия</button>
       </a>
 
       <a href="#" style="text-decoration: none;">

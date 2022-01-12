@@ -1,0 +1,19 @@
+{% extends 'client/base.html' %}
+{% block content %}
+  <h6>Проект: &nbsp;<em>{{interaction_detail.project}}</em></h6>
+  <h6>Клиент: <em>{{interaction_detail.client}}</em></h6>
+  <h6>Канал обращения: &nbsp;<em>{{interaction_detail.get_message_channel_display}}</em></h6>
+  <h6>Менеджер: &nbsp;<em>{{interaction_detail.manager}}</em></h6>
+  <div style="border-style: double; margin-right: 30px;">
+    <h6>Описание: </h6> {% autoescape off %}{{interaction_detail.description}}{% endautoescape %}
+  </div>
+  <h6>Оценка: &nbsp;<em>{{interaction_detail.get_grade_display}}</em></h6>
+
+  <div class="mt-4">
+    <a href="{% url 'interaction_update' interaction_detail.pk %}" class="text-secondary fs-6">Редактировать взаимодействие</a>
+  </div>
+  <div class="mt-2">
+    <a href="{% url 'interaction_delete' interaction_detail.pk %}" class="text-danger fs-6">Удалить взаимодействие</a>
+  </div>
+{% endblock %}
+
