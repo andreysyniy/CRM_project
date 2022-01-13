@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls.base import reverse
 from tinymce import models as tinymce_models
+from django.contrib.auth.models import User
 
 class Interaction(models.Model):
   project = models.ForeignKey('project.Project', on_delete=models.CASCADE, related_name='interaction_project', verbose_name='Проект')
@@ -20,7 +21,7 @@ class Interaction(models.Model):
     (INITIATIVE, 'Инициатива компании'),
   ]
   message_channel = models.CharField(max_length=3, choices=MESSAGE_CHANNEL_CHOICE, default=CHOICE, verbose_name='Канал обращения')
-  manager = models.ManyToManyField('users.CustomUser', related_name='interaction_manager', verbose_name='Менеджер')
+  manager = models.ManyToManyField(User, related_name='interaction_manager', verbose_name='Менеджер')
   description = tinymce_models.HTMLField('Описание')
 
   NOTHING = 'NTH'

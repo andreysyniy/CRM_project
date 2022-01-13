@@ -3,7 +3,8 @@
   <h6>Проект: &nbsp;<em>{{interaction_detail.project}}</em></h6>
   <h6>Клиент: <em>{{interaction_detail.client}}</em></h6>
   <h6>Канал обращения: &nbsp;<em>{{interaction_detail.get_message_channel_display}}</em></h6>
-  <h6>Менеджер: &nbsp;<em>{{interaction_detail.manager}}</em></h6>
+  <h6>Менеджер: &nbsp;<em>
+    {% for n in interaction_detail.manager.all %}{{n}} &nbsp;{% endfor %}</em></h6>
   <div style="border-style: double; margin-right: 30px;">
     <h6>Описание: </h6> {% autoescape off %}{{interaction_detail.description}}{% endautoescape %}
   </div>

@@ -3,6 +3,7 @@ from django.urls import path, include
 from project.urls import prj_cli_list_patterns
 from client.urls import home_patterns
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home_patterns)),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('', include(prj_cli_list_patterns)),
     path('', include('interactions.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

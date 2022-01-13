@@ -34,7 +34,11 @@
         <a href="{{ field.client.get_absolute_url }}">{{field.client}}</a> 
       </td>      
       <td>{{field.get_message_channel_display}}</td>
-      <td>{{field.manager.name}}</td>
+      <td>
+        {% for n in field.manager.all %}
+        <p>{{n}}</p>
+        {% endfor %}
+      </td>
       <td>
         {% autoescape off %}
         {{field.description}}

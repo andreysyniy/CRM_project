@@ -1,12 +1,17 @@
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from numpy import logical_not, require
 from .forms import PhoneFormset, EmailFormset, CreateEmailFormset, CreatePhoneFormset
 from .models import *
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+# class ClientList(LoginRequiredMixin, ListView):
 class ClientList(ListView):
   '''Отображение списка клиентов'''
+  # login_url = '/login/'
+  # redirect_field_name = 'redirect_to'
   model = Client
   paginate_by = 4
   template_name = 'client/client_list.html'
@@ -109,3 +114,4 @@ class ClientDelete(DeleteView):
   template_name = 'client/client_delete.html'
   success_url = reverse_lazy('client_list')
   extra_context = {'title': 'Удаление клиента'}
+
