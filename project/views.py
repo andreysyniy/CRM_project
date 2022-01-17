@@ -2,7 +2,7 @@ from django.urls.base import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from project.models import Project
 from client.models import Client
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class ProjectList(LoginRequiredMixin, ListView):
@@ -31,15 +31,16 @@ class ProjectClientList(LoginRequiredMixin, DetailView):
       return context
 
 
-class ProjectDetail(LoginRequiredMixin, DetailView):
+class ProjectDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
   model = Project
   template_name = 'project/project_detail.html'
   pk_url_kwarg = 'project_id'
   context_object_name = 'project_detail'
   extra_context = {'title': 'Информация о проекте'}
+  permission_required = 'project.view_project'
 
 
-class ProjectCreate(LoginRequiredMixin, CreateView):
+class ProjectCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
   '''Форма создания проекта'''  
   model = Project
   fields = '__all__'
@@ -47,10 +48,11 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
   pk_url_kwarg = 'project_id'
   success_url = reverse_lazy('project_list')
   extra_context = {'title': 'Создание проекта'}
+  permission_required = 'project.add_project'
 
 
 
-class ProjectUpdate(LoginRequiredMixin, UpdateView):
+class ProjectUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
   '''Форма редактирования проекта'''  
   model = Project
   fields = '__all__'
@@ -58,9 +60,10 @@ class ProjectUpdate(LoginRequiredMixin, UpdateView):
   pk_url_kwarg = 'project_id'
   success_url = reverse_lazy('project_list')
   extra_context = {'title': 'Редактирование проекта'}
+  permission_required = 'project.change_project'
 
 
-class ProjectDelete(LoginRequiredMixin, DeleteView):
+class ProjectDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
   '''Форма удаления проекта'''  
   model = Project
   fields = '__all__'
@@ -68,3 +71,4 @@ class ProjectDelete(LoginRequiredMixin, DeleteView):
   pk_url_kwarg = 'project_id'
   success_url = reverse_lazy('project_list')
   extra_context = {'title': 'Удаление проекта'}
+  permission_required = 'project.delete_project'

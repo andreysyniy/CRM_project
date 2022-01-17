@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import PhoneFormset, EmailFormset, CreateEmailFormset, CreatePhoneFormset
 from .models import *
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class ClientList(LoginRequiredMixin, ListView):
@@ -30,12 +30,13 @@ class ClientDetail(LoginRequiredMixin, DetailView):
   extra_context = {'title': 'Информация о клиенте'}
 
 
-class ClientCreate(LoginRequiredMixin, CreateView):
+class ClientCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
   '''Форма создания клиента'''
   model = Client
   fields = '__all__'
   template_name = 'client/client_create.html'
   success_url = reverse_lazy('client_list')
+  permission_required = 'client.add_client'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -68,13 +69,14 @@ class ClientCreate(LoginRequiredMixin, CreateView):
 
 
 
-class ClientUpdate(LoginRequiredMixin, UpdateView):
+class ClientUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
   '''Форма редактирования клиента'''  
   model = Client
   fields = '__all__'
   template_name = 'client/client_update.html'
   pk_url_kwarg = 'client_id'
   success_url = reverse_lazy('client_list')
+  permission_required = 'client.change_client'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -105,7 +107,7 @@ class ClientUpdate(LoginRequiredMixin, UpdateView):
       return super().form_invalid(form)
 
 
-class ClientDelete(LoginRequiredMixin, DeleteView):
+class ClientDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
   '''Форма удаления клиента'''
   model = Client
   fields = ['company_name', 'full_name_director', 'short_description', 'address']
@@ -113,4 +115,5 @@ class ClientDelete(LoginRequiredMixin, DeleteView):
   template_name = 'client/client_delete.html'
   success_url = reverse_lazy('client_list')
   extra_context = {'title': 'Удаление клиента'}
+  permission_required = 'client.delete_client'
 

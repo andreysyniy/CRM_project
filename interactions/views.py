@@ -6,10 +6,10 @@ from django.views.generic.list import ListView
 from client.models import Client
 from project.models import Project
 from .models import Interaction
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
-class InteractionsForClient(LoginRequiredMixin, DetailView):
+class InteractionsForClient(LoginRequiredMixin,  PermissionRequiredMixin, DetailView):
   '''Отображение взаимодействий для одного клиента'''
   model = Client
   paginate_by = 4
@@ -17,13 +17,15 @@ class InteractionsForClient(LoginRequiredMixin, DetailView):
   pk_url_kwarg = 'client_id'
   extra_context = {'title': 'Взаимодействия по клиенту'}
   allow_empty = True
+  permission_required = 'interactions.view_interaction'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['interactions_client_list'] = Interaction.objects.filter(client_id=self.kwargs['client_id']).order_by(self.request.GET.get('orderby', 'project'))
     return context
 
-class InteractionsForProject(LoginRequiredMixin, DetailView):
+
+class InteractionsForProject(LoginRequiredMixin,  PermissionRequiredMixin, DetailView):
   '''Отображение взаимодействий для одного проекта'''
   model = Project
   paginate_by = 4
@@ -31,6 +33,7 @@ class InteractionsForProject(LoginRequiredMixin, DetailView):
   pk_url_kwarg = 'project_id'
   extra_context = {'title': 'Взаимодействия по проекту'}
   allow_empty = True
+  permission_required = 'interactions.view_interaction'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -38,13 +41,13 @@ class InteractionsForProject(LoginRequiredMixin, DetailView):
     return context
 
 
-
-class InteractionsList(LoginRequiredMixin, ListView):
+class InteractionsList(LoginRequiredMixin,  PermissionRequiredMixin, ListView):
   '''Отображение взаимодействий для всех клиентов'''
   model = Interaction
   paginate_by = 4
   template_name = 'interactions/interactions_list.html'
   extra_context = {'title': 'Взаимодействия'}
+  permission_required = 'interactions.view_interaction'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -52,7 +55,7 @@ class InteractionsList(LoginRequiredMixin, ListView):
     return context
 
 
-class InteractionDetail(LoginRequiredMixin, DetailView):
+class InteractionDetail(LoginRequiredMixin,  PermissionRequiredMixin, DetailView):
   '''Отображение детальное отображение информации взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -61,9 +64,9 @@ class InteractionDetail(LoginRequiredMixin, DetailView):
   context_object_name = 'interaction_detail'
   # success_url = reverse_lazy('interactions_list')
   extra_context = {'title': 'Информация о взаимодействии'}
+  permission_required = 'interactions.view_interaction'
 
-
-class InteractionCreate(LoginRequiredMixin, CreateView):
+class InteractionCreate(LoginRequiredMixin,  PermissionRequiredMixin, CreateView):
   '''Создание нового взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -71,9 +74,9 @@ class InteractionCreate(LoginRequiredMixin, CreateView):
   # pk_url_kwarg = 'interaction_id'
   success_url = reverse_lazy('interactions_list')
   extra_context = {'title': 'Создание взаимодействия'}
+  permission_required = 'interactions.add_interaction'
 
-
-class InteractionUpdate(LoginRequiredMixin, UpdateView):
+class InteractionUpdate(LoginRequiredMixin,  PermissionRequiredMixin, UpdateView):
   '''Редактирование взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -81,10 +84,10 @@ class InteractionUpdate(LoginRequiredMixin, UpdateView):
   pk_url_kwarg = 'interaction_id'
   success_url = reverse_lazy('interactions_list')
   extra_context = {'title': 'Обновление взаимодействия'}
+  permission_required = 'interactions.change_interaction'
 
 
-
-class InteractionDelete(LoginRequiredMixin, DeleteView):
+class InteractionDelete(LoginRequiredMixin,  PermissionRequiredMixin, DeleteView):
   '''Удаление взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -92,3 +95,4 @@ class InteractionDelete(LoginRequiredMixin, DeleteView):
   pk_url_kwarg = 'interaction_id'
   success_url = reverse_lazy('interactions_list')
   extra_context = {'title': 'Удаление взаимодействия'}
+  permission_required = 'interactions.delete_interaction'
