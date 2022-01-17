@@ -6,10 +6,10 @@ from django.views.generic.list import ListView
 from client.models import Client
 from project.models import Project
 from .models import Interaction
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-class InteractionsForClient(DetailView):
+class InteractionsForClient(LoginRequiredMixin, DetailView):
   '''Отображение взаимодействий для одного клиента'''
   model = Client
   paginate_by = 4
@@ -23,7 +23,7 @@ class InteractionsForClient(DetailView):
     context['interactions_client_list'] = Interaction.objects.filter(client_id=self.kwargs['client_id']).order_by(self.request.GET.get('orderby', 'project'))
     return context
 
-class InteractionsForProject(DetailView):
+class InteractionsForProject(LoginRequiredMixin, DetailView):
   '''Отображение взаимодействий для одного проекта'''
   model = Project
   paginate_by = 4
@@ -39,7 +39,7 @@ class InteractionsForProject(DetailView):
 
 
 
-class InteractionsList(ListView):
+class InteractionsList(LoginRequiredMixin, ListView):
   '''Отображение взаимодействий для всех клиентов'''
   model = Interaction
   paginate_by = 4
@@ -52,7 +52,7 @@ class InteractionsList(ListView):
     return context
 
 
-class InteractionDetail(DetailView):
+class InteractionDetail(LoginRequiredMixin, DetailView):
   '''Отображение детальное отображение информации взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -63,7 +63,7 @@ class InteractionDetail(DetailView):
   extra_context = {'title': 'Информация о взаимодействии'}
 
 
-class InteractionCreate(CreateView):
+class InteractionCreate(LoginRequiredMixin, CreateView):
   '''Создание нового взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -73,7 +73,7 @@ class InteractionCreate(CreateView):
   extra_context = {'title': 'Создание взаимодействия'}
 
 
-class InteractionUpdate(UpdateView):
+class InteractionUpdate(LoginRequiredMixin, UpdateView):
   '''Редактирование взаимодействия'''
   model = Interaction
   fields = '__all__'
@@ -84,7 +84,7 @@ class InteractionUpdate(UpdateView):
 
 
 
-class InteractionDelete(DeleteView):
+class InteractionDelete(LoginRequiredMixin, DeleteView):
   '''Удаление взаимодействия'''
   model = Interaction
   fields = '__all__'

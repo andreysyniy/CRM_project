@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_extensions',
     'bootstrap_datepicker_plus',
+    "bootstrap5",
 ]
 
 MIDDLEWARE = [

@@ -1,14 +1,13 @@
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from numpy import logical_not, require
 from .forms import PhoneFormset, EmailFormset, CreateEmailFormset, CreatePhoneFormset
 from .models import *
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-# class ClientList(LoginRequiredMixin, ListView):
-class ClientList(ListView):
+class ClientList(LoginRequiredMixin, ListView):
+# class ClientList(ListView):
   '''Отображение списка клиентов'''
   # login_url = '/login/'
   # redirect_field_name = 'redirect_to'
@@ -22,7 +21,7 @@ class ClientList(ListView):
       return self.request.GET.get('orderby')
 
 
-class ClientDetail(DetailView):
+class ClientDetail(LoginRequiredMixin, DetailView):
   '''Детальная информация о клиенте'''
   model = Client
   template_name = 'client/client_detail.html'
@@ -31,7 +30,7 @@ class ClientDetail(DetailView):
   extra_context = {'title': 'Информация о клиенте'}
 
 
-class ClientCreate(CreateView):
+class ClientCreate(LoginRequiredMixin, CreateView):
   '''Форма создания клиента'''
   model = Client
   fields = '__all__'
@@ -69,7 +68,7 @@ class ClientCreate(CreateView):
 
 
 
-class ClientUpdate(UpdateView):
+class ClientUpdate(LoginRequiredMixin, UpdateView):
   '''Форма редактирования клиента'''  
   model = Client
   fields = '__all__'
@@ -106,7 +105,7 @@ class ClientUpdate(UpdateView):
       return super().form_invalid(form)
 
 
-class ClientDelete(DeleteView):
+class ClientDelete(LoginRequiredMixin, DeleteView):
   '''Форма удаления клиента'''
   model = Client
   fields = ['company_name', 'full_name_director', 'short_description', 'address']

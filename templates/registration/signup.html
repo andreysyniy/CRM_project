@@ -6,13 +6,6 @@
   <p>Ваше имя и пароль не подходят. Пожалуйста попробуйте снова.</p>
 {% endif %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Ваш акаунт не имеет доступа к этой странице. Для продолжения, пожалуйста введите логин и пароль акаунта имеющего доступ.</p>
-  {% else %}
-    <p>Пожалуйста войдите чтобы увидеть эту страницу.</p>
-  {% endif %}
-{% endif %}
 
 <!-- <link
   rel="stylesheet"
@@ -23,17 +16,15 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="authModalLabel">Авторизация</h5>
+        <h5 class="modal-title" id="authModalLabel">Регистрация</h5>
       </div>
       <div class="modal-body">
-        <form method="post" action="{% url 'login' %}">
+        <form method="post" action="{% url 'signup' %}">
           {% csrf_token %}
           {{form|crispy}}
           <div class="modal-footer">
-            <a href="{% url 'signup' %}" class="me-5">Создать акаунт</a>
             <button type="submit" class="btn btn-primary">Войти</button>
           </div>
-          <div></div>
         </form>
       </div>
     </div>

@@ -2,9 +2,10 @@ from django.urls.base import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from project.models import Project
 from client.models import Client
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProjectList(ListView):
+class ProjectList(LoginRequiredMixin, ListView):
   '''Отображение списка проектов'''
   model = Project
   paginate_by = 4
@@ -16,7 +17,7 @@ class ProjectList(ListView):
       return self.request.GET.get('orderby')
 
 
-class ProjectClientList(DetailView):
+class ProjectClientList(LoginRequiredMixin, DetailView):
   '''Отображение списка проектов для конкретного клиента'''
   model = Client
   template_name = 'project/project_client_list.html'
@@ -30,7 +31,7 @@ class ProjectClientList(DetailView):
       return context
 
 
-class ProjectDetail(DetailView):
+class ProjectDetail(LoginRequiredMixin, DetailView):
   model = Project
   template_name = 'project/project_detail.html'
   pk_url_kwarg = 'project_id'
@@ -38,7 +39,7 @@ class ProjectDetail(DetailView):
   extra_context = {'title': 'Информация о проекте'}
 
 
-class ProjectCreate(CreateView):
+class ProjectCreate(LoginRequiredMixin, CreateView):
   '''Форма создания проекта'''  
   model = Project
   fields = '__all__'
@@ -49,7 +50,7 @@ class ProjectCreate(CreateView):
 
 
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(LoginRequiredMixin, UpdateView):
   '''Форма редактирования проекта'''  
   model = Project
   fields = '__all__'
@@ -59,7 +60,7 @@ class ProjectUpdate(UpdateView):
   extra_context = {'title': 'Редактирование проекта'}
 
 
-class ProjectDelete(DeleteView):
+class ProjectDelete(LoginRequiredMixin, DeleteView):
   '''Форма удаления проекта'''  
   model = Project
   fields = '__all__'
